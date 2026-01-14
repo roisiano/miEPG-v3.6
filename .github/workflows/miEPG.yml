@@ -34,7 +34,7 @@ jobs:
       run: .github/workflows/EPG_script.sh
 
     - name: Listar archivos generados
-      run: ls -lh .
+      run: ls -R -lh .
 
     - name: Configurar identidad de Git
       run: |
@@ -43,8 +43,8 @@ jobs:
 
     - name: Subir archivos
       run: |
-        git add miEPG.xml miEPG.xml.gz
-        git commit -m "Actualización automática de miEPG.xml y miEPG.xml.gz"
+        git add -A
+        git commit -m "Actualización automática de miEPG.xml y miEPG.xml.gz" || echo "No hay cambios para commitear"
         git push --force
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
