@@ -414,13 +414,13 @@ MMA TV,MMA TV,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/i
 Gol Classics,Gol Classics,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Gol%20Classics.png
 Runtime Thriller-Terror,Runtime Thriller-Terror,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Thriller-Terror.png
 Runtime Comedia,Runtime Comedia,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Comedia.png
-Runtime Cine y Series,Runtime Cine y Series,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Cine%20y%20Series.png
-Runtime Series,Runtime Series,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Series.png
-Runtime Acción,Runtime Acción,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Acci%C3%B3n.png
-Runtime Crimen,Runtime Crimen,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Crimen.png
-Runtime Romance,Runtime Romance,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Runtime%20Romance.png
-RunTime Clásicos,RunTime Clásicos,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/RunTime%20Cl%C3%A1sicos.png
-RunTime Familia,RunTime Familia,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/RunTime%20Familia.png
+Runtime Cine y Series,Runtime Cine y Series,
+Runtime Series,Runtime Series,
+Runtime Acción,Runtime Acción,
+Runtime Crimen,Runtime Crimen,
+Runtime Romance,Runtime Romance,
+RunTime Clásicos,RunTime Clásicos,
+RunTime Familia,RunTime Familia,
 TRACE Sports Stars,TRACE Sports Stars,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/TRACE%20Sports%20Stars.png
 Horse TV,Horse TV,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Horse%20TV.png
 Nautical Channel,Nautical Channel,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Nautical%20Channel.png
@@ -561,66 +561,6 @@ PT | Sport TV 5,PT | Sport TV 5,https://raw.githubusercontent.com/davidmuma/pico
 PT | Sport TV 6,PT | Sport TV 6,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Sport%20TV%206.png
 PT | Sport TV 7,PT | Sport TV 7,https://mage.stream.nos.pt/mage/v1/Images?sourceUri=http%3A%2F%2Fvip.repositories.local.internal%2FRepositories.EPG%2FOttChannelIcons%2FSPTV_7HD.png&amp;profile=ott_16_220x64&amp;client_id=xe1dgrShwdR1DVOKGmsj8Ut4QLlGyOFI&amp;format=image/png
 PT | Sporting TV HD,PT | Sporting TV,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Sporting%20TV.png
-DE | TRT Türk HD,DE | TRT Türk,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/TRT%20T%C3%BCrk.png
-DE | Rally TV,DE | Rally TV,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Rally%20TV.png
-DE | DAZN 1,DE | DAZN 1,https://www.sky.de/static/img/senderlogos_dark/659_sky_logo_dazn1-hd_tvguide.png
-DE | DAZN 2,DE | DAZN 2,https://www.sky.de/static/img/senderlogos_dark/900_sky_logo_dazn2-hd_tvguide.png
-DE | Sky Sport Austria 1,DE | Sky Sport Austria 1,https://www.sky.de/static/img/senderlogos_dark/492_sky_logo_skysportaustria-hd_tvguide.png
-DE | Sky Sport Austria 2,DE | Sky Sport Austria 2,
-DE | Sky Sport Austria 3,DE | Sky Sport Austria 3,
-DE | Sky Sport Austria 4,DE | Sky Sport Austria 4,
-DE | Sky Sport Austria 5,DE | Sky Sport Austria 5,
-DE | Sky Sport Austria 6,DE | Sky Sport Austria 6,
-DE | Sky Sport Austria 7,DE | Sky Sport Austria 7,
-DE | Sky Sport Austria 8,DE | Sky Sport Austria 8,
-DE | Das Erste,DE | Das Erste,
-DE | ZDF,DE | ZDF,
-DE | RTL,DE | RTL,
-DE | KiKA,DE | KiKA,
-DE | MTV,DE | MTV,
-DE | ARTE,DE | ARTE,
-DE | QVC,DE | QVC,
-DE | More Than Sports TV,DE | More Than Sports TV,
-DE | MS Sport,DE | MS Sport,
-DE | Eurosport 1,DE | Eurosport 1,
-DE | Eurosport 2,DE | Eurosport 2,
-DE | Red Bull TV,DE | Red Bull TV,
-DE | Red Bull TV Motorsport,DE | Red Bull TV Motorsport,
-DE | SPORT1,DE | SPORT1,
-DE | Motorvision+,DE | Motorvision+,
-DE | eSportsONE,DE | eSportsONE,
-DE | MagentaSport,DE | MagentaSport,
-DE | SPORTDIGITAL FUSSBALL,DE | SPORTDIGITAL FUSSBALL,
-DE | Sportdigital1+,DE | Sportdigital1+,
-DE | Sky Sport Kompakt 1,DE | Sky Sport Kompakt 1,
-DE | Sky Sport News,DE | Sky Sport News,
-DE | Sky Sport Top Event,DE | Sky Sport Top Event,
-DE | Sky Sport Bundesliga,DE | Sky Sport Bundesliga,
-DE | Sky Sport F1,DE | Sky Sport F1,
-DE | Sky Sport Premier League,DE | Sky Sport Premier League,
-DE | Sky Sport Mix,DE | Sky Sport Mix,
-DE | Sky Sport Tennis,DE | Sky Sport Tennis,
-DE | Sky Sport Golf,DE | Sky Sport Golf,
-DE | Sky Sport Bundesliga 1,DE | Sky Sport Bundesliga 1,
-DE | Sky Sport Bundesliga 2,DE | Sky Sport Bundesliga 2,
-DE | Sky Sport Bundesliga 3,DE | Sky Sport Bundesliga 3,
-DE | Sky Sport Bundesliga 4,DE | Sky Sport Bundesliga 4,
-DE | Sky Sport Bundesliga 5,DE | Sky Sport Bundesliga 5,
-DE | Sky Sport Bundesliga 6,DE | Sky Sport Bundesliga 6,
-DE | Sky Sport Bundesliga 7,DE | Sky Sport Bundesliga 7,
-DE | Sky Sport Bundesliga 8,DE | Sky Sport Bundesliga 8,
-DE | Sky Sport Bundesliga 9,DE | Sky Sport Bundesliga 9,
-DE | Sky Sport Bundesliga 10,DE | Sky Sport Bundesliga 10,
-DE | Sky Sport 1,DE | Sky Sport 1,
-DE | Sky Sport 2,DE | Sky Sport 2,
-DE | Sky Sport 3,DE | Sky Sport 3,
-DE | Sky Sport 4,DE | Sky Sport 4,
-DE | Sky Sport 5,DE | Sky Sport 5,
-DE | Sky Sport 6,DE | Sky Sport 6,
-DE | Sky Sport 7,DE | Sky Sport 7,
-DE | Sky Sport 8,DE | Sky Sport 8,
-DE | Sky Sport 9,DE | Sky Sport 9,
-DE | Sky Sport 10,DE | Sky Sport 10,
 Onetoro,Onetoro,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Onetoro.png
 Alacantí TV,Alacantí TV,https://alacantitv.com/wp-content/uploads/2024/03/logo-alacantitv-programacion.jpg
 Onda Cádiz TV,Onda Cádiz TV,https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/Onda%20C%C3%A1diz%20TV.png
