@@ -53,9 +53,10 @@ jobs:
 
     - name: Subir archivos
       run: |
-        git add miEPG.xml miEPG.xml.gz epg_acumulado.xml epg_acumulado.xml.gz
+        # GitHub NO permite subir epg_acumulado.xml (>100 MB)
+        # Subimos solo los archivos válidos
+        git add miEPG.xml miEPG.xml.gz epg_acumulado.xml.gz
         git commit -m "Actualización automática de EPG"
         git push --force
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
