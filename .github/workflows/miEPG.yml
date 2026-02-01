@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Instalar dependencias
+      - name: Dependencias
         run: |
           sudo apt-get update
           sudo apt-get install -y xmlstarlet wget gzip dos2unix
@@ -23,11 +23,11 @@ jobs:
           dos2unix .github/workflows/EPG_script.sh
           chmod +x .github/workflows/EPG_script.sh
 
-      - name: Ejecutar script EPG
+      - name: Ejecutar script
         run: |
           .github/workflows/EPG_script.sh
 
-      - name: Subir resultados
+      - name: Commit resultados
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Actualización automática de EPG"
