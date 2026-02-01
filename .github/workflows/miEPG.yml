@@ -13,24 +13,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Dependencias
+      - name: Instalar dependencias
         run: |
           sudo apt-get update
           sudo apt-get install -y xmlstarlet wget gzip dos2unix
 
-      - name: Preparar script
+      - name: Normalizar script
         run: |
           dos2unix .github/workflows/EPG_script.sh
           chmod +x .github/workflows/EPG_script.sh
 
-      - name: Ejecutar script
+      - name: Ejecutar script original de EPG (estilo davidmuma)
         run: |
           .github/workflows/EPG_script.sh
 
-      - name: Commit resultados
+      - name: Comprimir XML a XML.GZ y eliminar XML
+        run: |
+          if [ -f miEPG.xml ]; then
+            gzip -f miEPG.xml
+          fi
+          if [ -f epg_acumulado.xml ]; then
+            gzip -f epg_acumulado.xml
+          fi
+
+      - name: Commit de resultados comprimidos
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Actualización automática de EPG"
+          commit_message: "Actualización automática de EPG (XML.GZ)"
           file_pattern: |
             miEPG.xml.gz
             epg_acumulado.xml.gz
