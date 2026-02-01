@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -40,7 +40,7 @@ gzip -f miEPG.xml
 cp miEPG.xml.gz "$GITHUB_WORKSPACE"
 
 ############################################################
-# AÑADIDO: GENERACIÓN DEL EPG ACUMULADO
+# AÑADIDO: GENERACIÓN DEL EPG ACUMULADO (CAMBIO MÍNIMO)
 ############################################################
 
 echo "Generando epg_acumulado.xml.gz basado en dias_pasados=$dias_pasados..."
@@ -78,6 +78,7 @@ gzip -f epg_acumulado.xml
 cp epg_acumulado.xml.gz "$GITHUB_WORKSPACE"
 
 echo "EPG diario y acumulado generados correctamente."
+
 
 
 
