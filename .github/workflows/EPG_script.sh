@@ -2,19 +2,14 @@
 
 set -e
 
-###############################################
-# CARGAR VARIABLES
-###############################################
-
+# Cargar variables
 source variables.txt
 
-###############################################
-# GENERAR EPG DEL DÍA (TAL CUAL ESTÁ)
-###############################################
-
+# Directorio temporal
 WORKDIR=$(mktemp -d)
 cd "$WORKDIR"
 
+# Crear archivo XML base
 echo '<?xml version="1.0" encoding="UTF-8"?><tv>' > miEPG.xml
 
 # Descargar y fusionar todas las EPGs
@@ -40,14 +35,15 @@ if [ "$dias_futuros" -gt 0 ]; then
     xmlstarlet ed -L -d "/tv/programme[@start > '$FUTURE_LIMIT']" miEPG.xml
 fi
 
+# Comprimir EPG del día
 gzip -f miEPG.xml
 cp miEPG.xml.gz "$GITHUB_WORKSPACE"
 
-###############################################
-# GENERAR EPG ACUMULADO
-###############################################
+############################################################
+# AÑADIDO: GENERACIÓN DEL EPG ACUMULADO
+############################################################
 
-echo "Generando epg_acumulado.xml.gz..."
+echo "Generando epg_acumulado.xml.gz basado en dias_pasados=$dias_pasados..."
 
 # Descomprimir acumulado si existe
 if [ -f "$GITHUB_WORKSPACE/epg_acumulado.xml.gz" ]; then
@@ -76,13 +72,12 @@ xmlstarlet sel -t -c "/tv/programme" epg_acumulado.xml >> epg_final.xml
 echo '</tv>' >> epg_final.xml
 
 mv epg_final.xml epg_acumulado.xml
-gzip -f epg_acumulado.xml
 
+# Comprimir acumulado
+gzip -f epg_acumulado.xml
 cp epg_acumulado.xml.gz "$GITHUB_WORKSPACE"
 
 echo "EPG diario y acumulado generados correctamente."
-
-
 
 
 
