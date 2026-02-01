@@ -3,39 +3,55 @@
 set -e
 
 ###############################################
-# CARGAR VARIABLES (corregidas)
+# CARGAR VARIABLES
 ###############################################
 
 source variables.txt
 
-# Validación mínima
-if [ -z "$dias_pasados" ] || [ -z "$dias_futuros" ]; then
-    echo "ERROR: variables dias_pasados o dias_futuros no definidas."
-    exit 1
+###############################################
+# GENERAR EPG DEL DÍA (TAL CUAL ESTÁ)
+###############################################
+
+WORKDIR=$(mktemp -d)
+cd "$WORKDIR"
+
+echo '<?xml version="1.0" encoding="UTF-8"?><tv>' > miEPG.xml
+
+# Descargar y fusionar todas las EPGs
+while read -r URL; do
+    [ -z "$URL" ] && continue
+    wget -q "$URL" -O epg.xml.gz
+    gunzip -f epg.xml.gz
+    cat epg.xml >> merged.xml
+done < "$GITHUB_WORKSPACE/epgs.txt"
+
+# Filtrar canales
+while read -r C; do
+    [ -z "$C" ] && continue
+    xmlstarlet sel -t -c "//channel[@id='$C']" merged.xml >> miEPG.xml
+    xmlstarlet sel -t -c "//programme[@channel='$C']" merged.xml >> miEPG.xml
+done < "$GITHUB_WORKSPACE/canales.txt"
+
+echo '</tv>' >> miEPG.xml
+
+# Limitar días futuros
+if [ "$dias_futuros" -gt 0 ]; then
+    FUTURE_LIMIT=$(date -d "+$dias_futuros days" +"%Y%m%d%H%M%S")
+    xmlstarlet ed -L -d "/tv/programme[@start > '$FUTURE_LIMIT']" miEPG.xml
 fi
 
-###############################################
-# GENERACIÓN DEL EPG DIARIO (TAL CUAL ESTÁ)
-###############################################
-
-# Ejecutar tu script original SIN MODIFICARLO
-bash .github/workflows/original_miEPG_script.sh
-
-# Comprobar que miEPG.xml.gz existe
-if [ ! -f miEPG.xml.gz ]; then
-    echo "ERROR: miEPG.xml.gz no fue generado por el script original."
-    exit 1
-fi
+gzip -f miEPG.xml
+cp miEPG.xml.gz "$GITHUB_WORKSPACE"
 
 ###############################################
-# GENERACIÓN DEL EPG ACUMULADO
+# GENERAR EPG ACUMULADO
 ###############################################
 
-echo "Generando epg_acumulado.xml.gz basado en dias_pasados=$dias_pasados..."
+echo "Generando epg_acumulado.xml.gz..."
 
 # Descomprimir acumulado si existe
-if [ -f epg_acumulado.xml.gz ]; then
-    gunzip -c epg_acumulado.xml.gz > epg_acumulado.xml
+if [ -f "$GITHUB_WORKSPACE/epg_acumulado.xml.gz" ]; then
+    gunzip -c "$GITHUB_WORKSPACE/epg_acumulado.xml.gz" > epg_acumulado.xml
 else
     echo '<?xml version="1.0" encoding="UTF-8"?><tv></tv>' > epg_acumulado.xml
 fi
@@ -43,14 +59,14 @@ fi
 # Descomprimir EPG del día
 gunzip -c miEPG.xml.gz > miEPG.xml
 
-# Calcular fecha límite para días pasados
+# Calcular fecha límite
 FECHA_LIMITE=$(date -d "$dias_pasados days ago" +"%Y%m%d%H%M%S")
 
-# Eliminar programas demasiado antiguos del acumulado
+# Eliminar programas antiguos
 xmlstarlet ed -d "/tv/programme[@start < '$FECHA_LIMITE']" epg_acumulado.xml > epg_tmp.xml
 mv epg_tmp.xml epg_acumulado.xml
 
-# Añadir los programas del día
+# Añadir programas del día
 xmlstarlet sel -t -c "/tv/programme" miEPG.xml >> epg_acumulado.xml
 
 # Reconstruir XML limpio
@@ -60,15 +76,8 @@ xmlstarlet sel -t -c "/tv/programme" epg_acumulado.xml >> epg_final.xml
 echo '</tv>' >> epg_final.xml
 
 mv epg_final.xml epg_acumulado.xml
-
-# Comprimir acumulado
 gzip -f epg_acumulado.xml
 
-###############################################
-# COPIAR RESULTADOS AL REPO
-###############################################
-
-cp miEPG.xml.gz "$GITHUB_WORKSPACE"
 cp epg_acumulado.xml.gz "$GITHUB_WORKSPACE"
 
 echo "EPG diario y acumulado generados correctamente."
