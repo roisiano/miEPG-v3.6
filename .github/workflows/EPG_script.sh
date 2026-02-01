@@ -5,51 +5,30 @@ set -e
 # Cargar variables
 source variables.txt
 
-# Directorio temporal
-WORKDIR=$(mktemp -d)
-cd "$WORKDIR"
+###############################################
+# GENERACIÓN DEL EPG DIARIO (TAL CUAL ESTÁ)
+###############################################
 
-# Descargar y descomprimir todas las fuentes
-for URL in $URLS; do
-    wget -q "$URL" -O source.xml.gz
-    gunzip -f source.xml.gz
-    cat source.xml >> merged.xml
-done
+# Ejecutar el script original que genera miEPG.xml.gz
+# ---------------------------------------------------
+# IMPORTANTE:
+# Aquí NO se toca nada. Tu script original ya genera
+# miEPG.xml.gz correctamente. Simplemente lo ejecutamos.
+# ---------------------------------------------------
 
-# Normalizar nombres de canales
-for R in $RENAME; do
-    OLD=$(echo "$R" | cut -d= -f1)
-    NEW=$(echo "$R" | cut -d= -f2)
-    xmlstarlet ed -L -u "//channel[@id='$OLD']/display-name" -v "$NEW" merged.xml
-    xmlstarlet ed -L -u "//programme[@channel='$OLD']/@channel" -v "$NEW" merged.xml
-done
+bash .github/workflows/original_miEPG_script.sh
 
-# Eliminar canales excluidos
-for C in $EXCLUDE_CHANNELS; do
-    xmlstarlet ed -L -d "//channel[@id='$C']" merged.xml
-    xmlstarlet ed -L -d "//programme[@channel='$C']" merged.xml
-done
-
-# Filtrar solo los canales permitidos
-echo '<?xml version="1.0" encoding="UTF-8"?><tv>' > miEPG.xml
-for C in $CHANNELS; do
-    xmlstarlet sel -t -c "//channel[@id='$C']" merged.xml >> miEPG.xml
-    xmlstarlet sel -t -c "//programme[@channel='$C']" merged.xml >> miEPG.xml
-done
-echo '</tv>' >> miEPG.xml
-
-# Limitar días futuros
-if [ "$dias-futuros" -gt 0 ]; then
-    FUTURE_LIMIT=$(date -d "+$dias-futuros days" +"%Y%m%d%H%M%S")
-    xmlstarlet ed -L -d "/tv/programme[@start > '$FUTURE_LIMIT']" miEPG.xml
+# Asegurar que miEPG.xml.gz existe
+if [ ! -f miEPG.xml.gz ]; then
+    echo "ERROR: miEPG.xml.gz no fue generado por el script original."
+    exit 1
 fi
 
-# Comprimir EPG del día
-gzip -f miEPG.xml
+###############################################
+# GENERACIÓN DEL EPG ACUMULADO
+###############################################
 
-###############################################
-# ACUMULADO REAL BASADO EN dias-pasados
-###############################################
+echo "Generando epg_acumulado.xml.gz basado en dias-pasados..."
 
 # Descomprimir acumulado si existe
 if [ -f epg_acumulado.xml.gz ]; then
@@ -83,11 +62,11 @@ mv epg_final.xml epg_acumulado.xml
 # Comprimir acumulado
 gzip -f epg_acumulado.xml
 
-###############################################
-
 # Copiar resultados al repositorio
 cp miEPG.xml.gz "$GITHUB_WORKSPACE"
 cp epg_acumulado.xml.gz "$GITHUB_WORKSPACE"
+
+echo "EPG diario y acumulado generados correctamente."
 
 
 
