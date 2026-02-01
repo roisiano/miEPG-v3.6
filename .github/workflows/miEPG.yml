@@ -16,11 +16,15 @@ jobs:
       - name: Instalar dependencias
         run: |
           sudo apt-get update
-          sudo apt-get install -y xmlstarlet wget gzip
+          sudo apt-get install -y xmlstarlet wget gzip dos2unix
+
+      - name: Preparar script
+        run: |
+          dos2unix .github/workflows/EPG_script.sh
+          chmod +x .github/workflows/EPG_script.sh
 
       - name: Ejecutar script EPG
         run: |
-          chmod +x .github/workflows/EPG_script.sh
           .github/workflows/EPG_script.sh
 
       - name: Subir resultados
